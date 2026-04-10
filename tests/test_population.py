@@ -19,3 +19,8 @@ def sample_file(tmp_path):
     test_file = tmp_path / "test_population.txt"
     test_file.write_text(content, encoding="utf-8")
     return str(test_file)
+
+def test_read_population_data(sample_file):
+    data = read_population_data(sample_file)
+    assert "Ukraine" in data
+    assert data["Ukraine"][2000] == 49000000
