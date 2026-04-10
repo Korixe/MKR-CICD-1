@@ -33,5 +33,14 @@ def calculate_population_change(data):
             curr_year = sorted_years[i]
             change = years[curr_year] - years[prev_year]
             changes[country][f"{prev_year}-{curr_year}"] = change
-            
+
     return changes
+
+def display_changes(changes):
+    for country, periods in changes.items():
+        print(f"\n{country}:")
+
+        for period, change in periods.items():
+            sign = "+" if change > 0 else ""
+
+            print(f"  {period}: {sign}{change}")
