@@ -20,3 +20,18 @@ def read_population_data(filename):
         print(f"Файл {filename} не знайдено.")
     
     return data
+
+def calculate_population_change(data):
+    changes = {}
+    for country, years in data.items():
+
+        sorted_years = sorted(years.keys())
+        changes[country] = {}
+
+        for i in range(1, len(sorted_years)):
+            prev_year = sorted_years[i - 1]
+            curr_year = sorted_years[i]
+            change = years[curr_year] - years[prev_year]
+            changes[country][f"{prev_year}-{curr_year}"] = change
+            
+    return changes
