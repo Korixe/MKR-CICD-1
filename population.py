@@ -34,4 +34,3 @@ def display_changes(changes):
         for period, change in periods.items():
             sign = "+" if change > 0 else ""
             print(f"  {period}: {sign}{change}")
-            
