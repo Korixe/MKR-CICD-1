@@ -46,4 +46,3 @@ def test_calculate_population_change_parametrized(
 ):
     changes = calculate_population_change(sample_data)
     assert changes[country][period] == expected
-    
