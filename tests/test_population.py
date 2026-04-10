@@ -25,6 +25,11 @@ def test_read_population_data(sample_file):
     assert "Ukraine" in data
     assert data["Ukraine"][2000] == 49000000
 
+def test_read_population_data_years(sample_file):
+    data = read_population_data(sample_file)
+    assert 2000 in data["Ukraine"]
+    assert 2010 in data["Ukraine"]
+
 @pytest.mark.parametrize("country, period, expected", [
     ("Ukraine", "2000-2010", -3100000),
     ("Ukraine", "2010-2020", -4900000),
