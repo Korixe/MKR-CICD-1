@@ -1,12 +1,14 @@
 import pytest
 from population import read_population_data, calculate_population_change
 
+
 @pytest.fixture
 def sample_data():
     return {
         "Ukraine": {2000: 49000000, 2010: 45900000, 2020: 41000000},
         "Poland": {2000: 38600000, 2010: 38500000, 2020: 37800000},
     }
+
 
 @pytest.fixture
 def sample_file(tmp_path):
@@ -20,15 +22,18 @@ def sample_file(tmp_path):
     test_file.write_text(content, encoding="utf-8")
     return str(test_file)
 
+
 def test_read_population_data(sample_file):
     data = read_population_data(sample_file)
     assert "Ukraine" in data
     assert data["Ukraine"][2000] == 49000000
 
+
 def test_read_population_data_years(sample_file):
     data = read_population_data(sample_file)
     assert 2000 in data["Ukraine"]
     assert 2010 in data["Ukraine"]
+
 
 @pytest.mark.parametrize("country, period, expected", [
     ("Ukraine", "2000-2010", -3100000),
@@ -36,6 +41,8 @@ def test_read_population_data_years(sample_file):
     ("Poland", "2000-2010", -100000),
     ("Poland", "2010-2020", -700000),
 ])
-def test_calculate_population_change_parametrized(sample_data, country, period, expected):
+def test_calculate_population_change_parametrized(
+    sample_data, country, period, expected
+):
     changes = calculate_population_change(sample_data)
     assert changes[country][period] == expected
