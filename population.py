@@ -15,7 +15,7 @@ def read_population_data(filename):
                 if country not in data:
                     data[country] = {}
 
-                data[country].append({"year": year, "population": population})
+                data[country][year] = population
     except FileNotFoundError:
         print(f"Файл {filename} не знайдено.")
     
