@@ -24,3 +24,13 @@ def test_read_population_data(sample_file):
     data = read_population_data(sample_file)
     assert "Ukraine" in data
     assert data["Ukraine"][2000] == 49000000
+
+@pytest.mark.parametrize("country, period, expected", [
+    ("Ukraine", "2000-2010", -3100000),
+    ("Ukraine", "2010-2020", -4900000),
+    ("Poland", "2000-2010", -100000),
+    ("Poland", "2010-2020", -700000),
+])
+def test_calculate_population_change_parametrized(sample_data, country, period, expected):
+    changes = calculate_population_change(sample_data)
+    assert changes[country][period] == expected
